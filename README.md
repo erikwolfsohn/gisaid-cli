@@ -1,5 +1,2 @@
 # gisaid-cli
-[![Docker Repository on Quay](https://quay.io/repository/broadinstitute/gisaid-cli/status "Docker Repository on Quay")](https://quay.io/repository/broadinstitute/gisaid-cli)
-
-This repo builds a Docker container with [GISAID](https://www.gisaid.org/)-provided CLI tools. Right now, this is only the [CLI uploader](https://www.gisaid.org/fileadmin/gisaid/files/pdfs/CLI_Guide.pdf), which is a python script released by GISAID under a GPLv3 open source license.
-GISAID_submission.wdl can be used to perform GISAID submissions from the Terra platform
+This repo provides a workflow which can be used to perform GISAID submissions from the Terra platform. This workflow requires the covCLI executable provided by GISAID to function. You can obtain it by logging into your GISAID account, navigating to the upload section, selecting "covCLI," and downloading the Linux release. Unzip the downloaded archive, upload it to your workspace, and provide the path to the executable as workflow input ("gs://your-workspace-storage-bucket/path/to/covCLI").
