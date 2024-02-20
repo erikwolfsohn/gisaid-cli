@@ -55,7 +55,7 @@ task update_GISAID_ID_terratable {
 
 	matches_dict = {}
 
-	with open(~{gisaid_upload_log}, 'r') as logfile:
+	with open("~{gisaid_upload_log}", 'r') as logfile:
 	for line in logfile:
 		match1 = pattern1.search(line)
 		match2 = pattern2.search(line)
