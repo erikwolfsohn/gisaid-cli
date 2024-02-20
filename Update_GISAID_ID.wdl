@@ -18,6 +18,7 @@ call update_GISAID_ID_terratable {
 
 output {
 		File GISAID_ID_update_log = update_GISAID_ID_terratable.GISAID_ID_update_log
+		File GISAID_ID_update_error  = update_GISAID_ID_terratable.GISAID_ID_update_error
 	}
 }
 
