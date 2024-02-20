@@ -76,12 +76,12 @@ task update_GISAID_ID_terratable {
 	for result in data['results']:
 		submission_id = result['attributes']['submission_id']
 		name = result['name']
-
-	if submission_id in matches_dict:
-		temp_dict[name] = matches_dict[submission_id]
-	else:
-		# If there's no match, keep the original key-value pair
-		temp_dict[submission_id] = matches_dict.get(submission_id, None)
+    
+		if submission_id in matches_dict:
+			temp_dict[name] = matches_dict[submission_id]
+		else:
+			# If there's no match, keep the original key-value pair
+			temp_dict[submission_id] = matches_dict.get(submission_id, None)
 
 	matches_dict = temp_dict
 
@@ -89,7 +89,7 @@ task update_GISAID_ID_terratable {
 
 	ws_updates = []
 	for key, value in matches_dict.items():
-	#print(key,value)
+	print(key,value)
 		ws_updates.append(fapi._attr_set('GISAID_ID', value))
 		fapi.update_entity(ws_namespace, ws_name, table_name,key,ws_updates)
 
@@ -99,6 +99,7 @@ task update_GISAID_ID_terratable {
 
 	output {
 		File GISAID_ID_update_log = stdout()
+		File GISAID_ID_update_error = stderr()
 	}
 
 	runtime {
