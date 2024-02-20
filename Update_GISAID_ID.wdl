@@ -1,3 +1,5 @@
+version 1.0
+
 workflow submit_GISAID {
 input {
 	File gisaid_upload_log
