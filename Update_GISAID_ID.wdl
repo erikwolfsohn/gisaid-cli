@@ -56,13 +56,13 @@ task update_GISAID_ID_terratable {
 	matches_dict = {}
 
 	with open("~{gisaid_upload_log}", 'r') as logfile:
-	for line in logfile:
-		match1 = pattern1.search(line)
-		match2 = pattern2.search(line)
-		if match1 and match2:
-			key = match1.group()
-			value = match2.group()
-			matches_dict[key] = value
+		for line in logfile:
+			match1 = pattern1.search(line)
+			match2 = pattern2.search(line)
+			if match1 and match2:
+				key = match1.group()
+				value = match2.group()
+				matches_dict[key] = value
 
 	#print(matches_dict)
 
@@ -74,8 +74,8 @@ task update_GISAID_ID_terratable {
 	temp_dict = {}
 
 	for result in data['results']:
-	submission_id = result['attributes']['submission_id']
-	name = result['name']
+		submission_id = result['attributes']['submission_id']
+		name = result['name']
 
 	if submission_id in matches_dict:
 		temp_dict[name] = matches_dict[submission_id]
@@ -85,19 +85,13 @@ task update_GISAID_ID_terratable {
 
 	matches_dict = temp_dict
 
-	print(matches_dict)
-
-	for i in range(len(matches_dict)):
-	#print(matches_dict[i][0], matches_dict[i][1])
-	ws_updates.append(fapi._attr_set(ws_attr[i][0], ws_attr[i][1]))
-
-	fapi._attr_set(matches_dict[])
+	#print(matches_dict)
 
 	ws_updates = []
 	for key, value in matches_dict.items():
 	#print(key,value)
-	ws_updates.append(fapi._attr_set('GISAID_ID', value))
-	fapi.update_entity(ws_namespace, ws_name, table_name,key,ws_updates)
+		ws_updates.append(fapi._attr_set('GISAID_ID', value))
+		fapi.update_entity(ws_namespace, ws_name, table_name,key,ws_updates)
 
 	CODE
 
