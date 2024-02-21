@@ -96,7 +96,7 @@ task update_GISAID_ID_terratable {
 		# upload_entities updates multiple entities with one API call
 		header="entity:"+table_name+"_id\tGISAID_ID\n"
 		for key, value in matches_dict.items():
-  			header += key + "\t" + value + "\n"
+			header += key + "\t" + value + "\n"
 
 		fapi.upload_entities(ws_namespace, ws_name, header, model='flexible')	
 
