@@ -81,18 +81,24 @@ task update_GISAID_ID_terratable {
 			if submission_id in matches_dict:
 				temp_dict[name] = matches_dict[submission_id]
 			else:
-				# If there's no match, keep the original key-value pair
 				temp_dict[submission_id] = matches_dict.get(submission_id, None)
 
 		matches_dict = temp_dict
 
 		#print(matches_dict)
 
-		ws_updates = []
+		# ws_updates = []
+		# for key, value in matches_dict.items():
+		# 	print(key,value)
+		# 	ws_updates.append(fapi._attr_set('GISAID_ID', value))
+		# 	fapi.update_entity(ws_namespace, ws_name, table_name,key,ws_updates)
+
+		# upload_entities updates multiple entities with one API call
+		header="entity:"+table_name+"_id\tGISAID_ID\n"
 		for key, value in matches_dict.items():
-			print(key,value)
-			ws_updates.append(fapi._attr_set('GISAID_ID', value))
-			fapi.update_entity(ws_namespace, ws_name, table_name,key,ws_updates)
+  			header += key + "\t" + value + "\n"
+
+		fapi.upload_entities(ws_namespace, ws_name, header, model='flexible')	
 
 		CODE
 
