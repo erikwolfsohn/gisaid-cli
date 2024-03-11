@@ -6,6 +6,7 @@ input {
 	String ws_namespace
 	String ws_name
 	String table_name
+	String subid_prefix
 }
 
 call update_GISAID_ID_terratable {
@@ -13,7 +14,8 @@ call update_GISAID_ID_terratable {
 	gisaid_upload_log=gisaid_upload_log,
 	ws_namespace=ws_namespace ,
 	ws_name=ws_name,
-	table_name=table_name
+	table_name=table_name,
+	subid_prefix=subid_prefix
 }
 
 output {
@@ -28,6 +30,7 @@ task update_GISAID_ID_terratable {
 		String ws_namespace
 		String ws_name
 		String table_name
+		String subid_prefix
 	}
 
 	command <<<
@@ -51,7 +54,7 @@ task update_GISAID_ID_terratable {
 		ws_name = "~{ws_name}"
 		table_name = "~{table_name}"
 
-		pattern1 = re.compile(r'CA-CCPHL-\d+')
+		pattern1 = re.compile(r'~{subid_prefix}-\d+')
 		pattern2 = re.compile(r'EPI_ISL_\d+')
 
 		matches_dict = {}
