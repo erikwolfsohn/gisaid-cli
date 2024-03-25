@@ -54,7 +54,7 @@ task update_GISAID_ID_terratable {
 		ws_name = "~{ws_name}"
 		table_name = "~{table_name}"
 
-		pattern1 = re.compile(r'~{subid_prefix}-\d+')
+		pattern1 = re.compile(r'~{subid_prefix}-\w+-\w+')
 		pattern2 = re.compile(r'EPI_ISL_\d+')
 
 		matches_dict = {}
